@@ -12,6 +12,10 @@ public static class UniqueNumberGenerator
 
         // Shuffling algorithm from https://stackoverflow.com/questions/273313/randomize-a-listt
         v = v.OrderBy(i => new Random().Next());
+
+        if (v.Distinct().Count() != 1000)
+            throw new Exception("This method is broken");
+
         return v;
     }
 
