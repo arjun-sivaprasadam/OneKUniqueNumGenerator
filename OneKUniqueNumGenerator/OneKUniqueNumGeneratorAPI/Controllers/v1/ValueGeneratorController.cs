@@ -1,9 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-using OneKUniqueNumGeneratorAPI.Logic;
-
-namespace OneKUniqueNumGeneratorAPI.Controllers.v1;
+﻿namespace OneKUniqueNumGeneratorAPI.Controllers.v1;
 
 [Route("api/v1/[controller]")]
 [ApiController]
