@@ -9,8 +9,8 @@ public class ValueGeneratorController : ControllerBase
 {
     // GET: api/v1/ValueGenerator
     [HttpGet]
-    public IEnumerable<string> Get()
+    public ActionResult<IEnumerable<string>> Get()
     {
-        return new string[] { "value1", "value2" };
+        return Ok(new string[] { "value1", "value2" });
     }
 }
