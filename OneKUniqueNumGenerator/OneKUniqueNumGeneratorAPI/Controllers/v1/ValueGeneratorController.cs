@@ -10,11 +10,12 @@ public class ValueGeneratorController : ControllerBase
     /// </summary>
     /// <returns>List of 1k random numbers</returns>
     [HttpGet]
-    public ActionResult<IEnumerable<ushort>> Get()
+    public async Task<ActionResult<IEnumerable<ushort>>> Get()
     {
         try
         {
-            return Ok(UniqueNumberGenerator.GetRandomNumbers());
+            var output = UniqueNumberGenerator.GetRandomNumbers();
+            return Ok(await output);
         }
         catch (Exception)
         {

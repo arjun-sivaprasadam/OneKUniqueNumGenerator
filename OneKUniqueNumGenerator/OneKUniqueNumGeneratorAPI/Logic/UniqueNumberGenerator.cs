@@ -11,7 +11,7 @@ public static class UniqueNumberGenerator
     /// <returns>A List of unique integers with a total count of <paramref name="count"/></returns>
     /// <exception cref="ArgumentOutOfRangeException"><paramref name="minValue"/> is greater than <paramref name="maxValue"/>.</exception>
     /// <exception cref="StackOverflowException"> When the count and differrence of <paramref name="maxValue"/> and <paramref name="minValue"/> is comparable!.</exception>
-    public static IEnumerable<ushort> GetRandomNumbers(ushort count = 1000, ushort rangeMin = ushort.MinValue, ushort rangeMax = ushort.MaxValue, bool keepRandomOrder = false)
+    public static async Task<IEnumerable<ushort>> GetRandomNumbers(ushort count = 1000, ushort rangeMin = ushort.MinValue, ushort rangeMax = ushort.MaxValue, bool keepRandomOrder = false)
     {
         if (count < rangeMin || count > (rangeMax) || count > (rangeMax - rangeMin))
             throw new ArgumentOutOfRangeException(nameof(count), $" count > {rangeMin} and count < {rangeMax} " +
@@ -19,11 +19,14 @@ public static class UniqueNumberGenerator
 
         List<ushort> values = new List<ushort>(count);
 
-        for (int i = 0; i < count; i++)
-            AddUinqueUshortToList(ref values, rangeMin, rangeMax);
+        await Task.Run(() =>
+        {
+            for (int i = 0; i < count; i++)
+                AddUinqueUshortToList(ref values, rangeMin, rangeMax);
 
-        if (!keepRandomOrder)
-            values.Sort();
+            if (!keepRandomOrder)
+                values.Sort();
+        });
 
         return values;
     }
