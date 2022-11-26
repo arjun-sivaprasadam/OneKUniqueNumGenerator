@@ -3,6 +3,19 @@
 public static class UniqueNumberGenerator
 {
     /// <summary>
+    /// Returns 1000 unique numbers with no repetition, and within the range of 1 to 1000
+    /// </summary>
+    /// <returns></returns>
+    public async static Task<IEnumerable<ushort>> Get1KMubersInRandomOrder()
+    {
+        var v = Enumerable.Range(1, 1000).Select(i => (ushort)i);
+
+        // Shuffling algorithm from https://stackoverflow.com/questions/273313/randomize-a-listt
+        v = v.OrderBy(i => new Random().Next());
+        return v;
+    }
+
+    /// <summary>
     /// Default: Returns a list of unique integers between <paramref name="rangeMax"/> and <paramref name="rangeMin"/>
     /// </summary>
     /// <param name="count">Total items to be added to the list, Default = 1000</param>
@@ -13,7 +26,7 @@ public static class UniqueNumberGenerator
     /// <exception cref="StackOverflowException"> When the count and differrence of <paramref name="maxValue"/> and <paramref name="minValue"/> is comparable!.</exception>
     public static async Task<IEnumerable<ushort>> GetRandomNumbers(ushort count = 1000, ushort rangeMin = ushort.MinValue, ushort rangeMax = ushort.MaxValue, bool keepRandomOrder = false)
     {
-        if (count < rangeMin || count > (rangeMax) || count > (rangeMax - rangeMin))
+        if (count < rangeMin || count > (rangeMax) || count > (rangeMax - rangeMin + 1))
             throw new ArgumentOutOfRangeException(nameof(count), $" count > {rangeMin} and count < {rangeMax} " +
                 $"or the count is too large to produce {count} unique values in between the given range!");
 

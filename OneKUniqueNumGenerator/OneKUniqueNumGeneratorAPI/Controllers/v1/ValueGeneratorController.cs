@@ -14,10 +14,10 @@ public class ValueGeneratorController : ControllerBase
     {
         try
         {
-            var output = UniqueNumberGenerator.GetRandomNumbers();
-            return Ok(await output);
+            var output = await UniqueNumberGenerator.Get1KMubersInRandomOrder();
+            return Ok(output);
         }
-        catch (Exception)
+        catch (Exception ex)
         {
             // TODO - Logic to log this exception to logfile.
 
